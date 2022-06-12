@@ -1,0 +1,69 @@
+---
+openapi: 3.0.1
+info:
+  title: Metic API V1
+  version: v1
+host: ''
+basepath: "/"
+paths:
+  "/api/v1/metrics/GetMetrics":
+    get:
+      summary: Retrieves all metrics records for timelines
+      tags:
+      - Metrics, Get Metrics Records
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: integer
+                        created_on:
+                          type: timestamp
+  "/api/v1/metrics/AddNewMetric":
+    post:
+      summary: Create a Metric
+      tags:
+      - New Metrics
+      parameters: []
+      responses:
+        '201':
+          description: Metric created
+        '422':
+          description: Invalid Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: integer
+                created_on:
+                  type: timestamp
+              required:
+              - name
+              - value
+              - created_on
+schemes:
+- http
+- https
+consumes:
+- application/json
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000
