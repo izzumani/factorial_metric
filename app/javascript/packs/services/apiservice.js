@@ -1,6 +1,4 @@
-var moment = require('moment'); // require
-
-const tlArr = [
+const  GetMetricDataApi = [
     {
         "id": 2,
         "name": "sample_1",
@@ -45,4 +43,4 @@ const tlArr = [
 
 
 
-console.log(JSON.stringify(reduceGlobalObj))
+export default GetMetricDataApi;
