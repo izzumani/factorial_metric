@@ -21,7 +21,7 @@ const ChangeTimelines = () =>
 
         const handleChange = (event) => {
                 setSelectValue(event.target.value);
-                console.log(`Pass Data ${event.target.value}`);
+                
                 changeMetricData(event.target.value)
           };
 

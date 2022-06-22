@@ -2,6 +2,7 @@ class Api::V1::MetricsController < ApplicationController
     before_action
     def index
         @metrics = Metric.all.order(created_on: :asc)
+        puts "loading metrics"
         render json: @metrics, status: :ok
     end
 

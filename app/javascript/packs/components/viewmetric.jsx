@@ -4,18 +4,21 @@ import ViewTimelines from "./viewtimelines"
 import {useStyles} from '../styles/useStyles'
 import {Paper,Box } from "@material-ui/core";
 import MetricsContextProvider from "../contextapi/metricscontext";
-import ChangeTimelines from "../components/changetimeline";
-
+import ChangeTimelines from "./changetimeline";
+import AddNewMetricTimelines from "./addNewMetric";
+ 
 const ViewMetrics = ()=> {
   const classes = useStyles();
   return (
     <Container maxWidth="md">
-      <Typography variant="h3" component="h1" gutterBottom>
+      <Typography variant="button" component="h1" gutterBottom>
         Metrics
       </Typography>
     <MetricsContextProvider>
     <Paper className={classes.metricsContainer}>
         <Box display="flex" flexDirection="column" alignItems="stretch">
+          <AddNewMetricTimelines/>
+          <Divider/>
           <ChangeTimelines/>
           <Divider/>
           <ViewTimelines/>

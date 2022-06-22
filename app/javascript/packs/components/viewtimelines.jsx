@@ -9,28 +9,13 @@ import {MetricContext} from '../contextapi/metricscontext'
 const ViewTimelines = () => 
     {
         const classes = useStyles();
-        // const [timeline,setTimeline] = useState([]);
-        const {timeline} = useContext(MetricContext);
-        
-//         useEffect (()=>{
-            
-//             console.log(`metricData_2: ${JSON.stringify(metricData)}`);
-//             setTimeline(metricData);
-
-// },[metricData]);
-
-// useEffect (()=>{
-    
-//     if (statusMetric.isOnLoad)
-//     {
-//         console.log('Get Data on Load');
-//         getMetricData();
-//     }
-
-
-
-// },[statusMetric.isOnLoad])
-
+        const [timeline,setTimeline] = useState([])
+        const {metricData} = useContext(MetricContext);
+useEffect(()=>{
+console.log(`metricData: ${metricData}`);
+if (metricData !=undefined)
+    setTimeline(metricData);
+},[metricData])        
     return (
                 
                         <Timeline mode="right">

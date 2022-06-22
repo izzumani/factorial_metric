@@ -1,4 +1,4 @@
-import GetMetricDataApi from '../services/apiservice';
+import {CachedMetricData} from '../services/apiservice';
 import moment from 'moment';
 export const initalState ={
     metricData:[],
@@ -7,33 +7,35 @@ export const initalState ={
     isOnChange: false
 
 }
-
-const metricsReducer =(state,action)=>{
+/// updateding
+ const  metricsReducer = (state,action)=>{
     const {type,payload} =action;
 
     switch (type) {
         case "LOAD":
-            let _getMetricData = GetMetricDataApi;
-            console.log(`_getMetricData: ${_getMetricData}`);
+            let _getMetricData = CachedMetricData
+            
             let _metricLabel = "D";
-            console.log(`_metricLabel: ${_metricLabel}`);
-
             let metricDataByTimestamp = getMetricData(_getMetricData,_metricLabel)
-
+            // console.log(`metricDataByTimestamp: ${JSON.stringify(metricDataByTimestamp)} and is Array ${Array.isArray(metricDataByTimestamp)}`);
+            
             return {
                 ...state,
                 metricData: [].concat(metricDataByTimestamp),
                 isOnLoad:false
             }
+
+                
+                
             break;
     
         case "ADD_NEW":
             console.log('Adding Data')
             break;
         case "CHANGE_TIMELINE":
-            let _getMetricDataChange = GetMetricDataApi;
+            let _getMetricDataChange = CachedMetricData;
             let _metricLabelChange = payload.Label;
-            console.log(`_metricLabel: ${_metricLabelChange}`);
+            
 
             let metricDataByTimestampChange = getMetricData(_getMetricDataChange,_metricLabelChange)
 
@@ -97,8 +99,7 @@ const getMetricData = (_metricData,_metricLabel)=>{
        newArray.push(JSON.parse(JSON.stringify(reduceGlobalObj)));
    });
    
-   console.log(`newArray: ${JSON.stringify(newArray)}`);
-   
+//    console.log(`newArray: ${JSON.stringify(newArray)}`);
    return newArray;
    
    

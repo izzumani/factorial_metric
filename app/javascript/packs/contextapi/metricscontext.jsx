@@ -1,5 +1,5 @@
 import React, {createContext, useReducer} from 'react'
-
+import {GetMetricDataApi} from '../services/apiservice';
 import metricsReducer, {initalState} from '../reducers/metricsReducer'
 export const MetricContext = createContext(initalState);
 
@@ -11,17 +11,18 @@ const MetricsContextProvider =({children})=>{
 
 const changeMetricData = (metricLabel)=>{
     
-
-    console.log(`changeMetricData parameter after set ${metricLabel}`);
     dispatch({type:"CHANGE_TIMELINE",payload:{Label:metricLabel}});
 }
 if (state.isOnLoad)
 {
-
-    dispatch({type:"LOAD",payload:{}});
+    console.log('Loading data');
+     GetMetricDataApi().then(()=>{
+        dispatch({type:"LOAD",payload:{}});
+     }).catch((err)=>console.log(`Err: ${err}`));
+    
 }
     return (
-        <MetricContext.Provider value={{timeline:state.metricData,changeMetricData}}>
+        <MetricContext.Provider value={{metricData:state.metricData,changeMetricData}}>
           {children}          
         </MetricContext.Provider>
       );
